@@ -3,7 +3,7 @@
 
 ### Demo
 
-A [second screen &lt;video&gt; sharing demo](webscreens.github.io/requestshowmedia/demo/) displays a `<video>` contained on a web page on a second screen and allows its playback to be controlled using the standard `HTMLMediaElement` methods `play()`, `pause()`, and `fastSeek(time)`. The demo works in modern browsers (tested with latest Chrome, Firefox, and Safari) by emulating a second screen using a new window. If an [experimental Chromium build](http://webscreens.github.io/demo/#binaries) is used, the video is displayed on a real second screen.
+A [second screen &lt;video&gt; sharing demo](http://webscreens.github.io/requestshowmedia/demo/) displays a `<video>` contained on a web page on a second screen and allows its playback to be controlled using the standard `HTMLMediaElement` methods `play()`, `pause()`, and `fastSeek(time)`. The demo works in modern browsers (tested with latest Chrome, Firefox, and Safari) by emulating a second screen using a new window. If an [experimental Chromium build](http://webscreens.github.io/demo/#binaries) is used, the video is displayed on a real second screen.
 
 ### How It Works
 
