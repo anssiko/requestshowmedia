@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Player</title>
+    <style>
+      html { width: 100%; height: 100%; background-color: #000; }
+      body { margin: 0; height: 100%; width: 100%; display: flex;
+             align-items: center; justify-content: center; }
+      video { width: 100%; }
+    </style>
+    <script>
+    (function () {
+
+    var openerOrigin = null,
+        timeUpdateListener = null;
+    
+    function open(event) {
+      var video = document.querySelector('video'),
+          currentSrc = event.data.currentSrc,
+          currentTime = event.data.currentTime;
+
+      timeUpdateListener = function () {
+        opener.postMessage({
+          cmd: 'ontimeupdateonsecondscreen',
+          currentTime: video.currentTime
+        }, openerOrigin);
+      };
+      
+      video.src = currentSrc;
+      video.dataset.filename = currentSrc.split('/')[currentSrc.split('/').length-1];
+      document.title = '[Playing] ' + video.dataset.filename;
+      
+      video.addEventListener('loadedmetadata', function () {
+        video.currentTime = currentTime;
+      });
+      
+      video.addEventListener('timeupdate', timeUpdateListener);
+    }
+    
+    addEventListener('message', function (event) {
+      var video = document.querySelector('video');
+      
+      openerOrigin = event.origin;
+      if (video.seeking) return;
+      
+      switch (event.data.cmd) {
+        case 'open':
+          open(event);
+          break;
+        case 'play':
+          video.play();
+          document.title = '[Playing] ' + video.dataset.filename;
+          break;
+        case 'pause':
+          video.pause();
+          document.title = '[Paused] ' + video.dataset.filename;
+          break;
+        case 'fastSeek':
+          // video.fastSeek(event.data.currentTime); // not implemented by browsers yet
+          // ... so we're emulating fastSeek() by setting currentTime
+          video.currentTime = event.data.currentTime;
+          break;
+        default:
+          break;
+      }
+    });
+
+    addEventListener('beforeunload', function () {
+      var video = document.querySelector('video');
+
+      // FIXME: remove timeUpdateListener before unload to prevent multiple
+      // listeners posting the same data if open() is called multiple times.
+      video.removeEventListener('timeupdate', timeUpdateListener);
+      
+      opener.postMessage({
+        cmd: 'play',
+        currentTime: video.currentTime
+      }, openerOrigin);
+    });
+    
+    }());
+    </script> 
+    </head>
+    <body>
+      <video autoplay></video>
+    </body>
+</html>

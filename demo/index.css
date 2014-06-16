@@ -1,0 +1,56 @@
+body {
+  width: 640px;
+  font: 100% sans-serif;
+  margin-top: 32px;
+  padding-top: 0;
+  top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+video {
+  width: 100%;
+  box-shadow: 0 0 25px #000;
+  transition: all 0.5s ease-in;
+}
+
+#controls {
+}
+
+#controls > button { 
+  border: 0;
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+}
+
+#controls > button:hover { 
+  background-color: #f0f0f0;
+}
+
+#seek {
+  width: 500px;
+}
+
+@font-face {
+  font-family: SecondScreenSymbol;
+  src: url("icon.woff");
+}
+
+#show, .show-icon {
+  font-family: SecondScreenSymbol;
+  font-size: 120%;
+}
+
+#show {
+  float: right;
+}
+
+footer {
+  font-size: 75%;
+  text-shadow: #fff 0 1px 0;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  color: gray;
+}

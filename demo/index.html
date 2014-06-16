@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Second Screen &lt;video&gt; Sharing Demo</title>
+  <script src="../requestshowmedia.js" data-player="../player.html"></script>
+  <!-- Advanced: if player.html is not same origin, define its origin in "data-playerorigin" -->
+  <!-- script src="../requestshowmedia.js" data-player="../player.html" data-playerorigin="/"></script-->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <video autoplay>
+    <source src="big-buck-bunny.mp4">
+    <source src="big-buck-bunny.webm">
+  </video>
+  <div id="controls">
+    <button id="play">&#9658;</button>
+    <button id="pause">&#9612;&#9612;</button>
+    <input id="seek" type="range" value="0">
+    <button id="show">s</button>
+  </div>
+  <p>
+    Tip: click the <span class="show-icon">s</span> icon to display the
+    video on a second screen. For more information, please consult the
+    <a href="../README.md">README</a>.
+  </p>
+  <footer>
+    Demo brought to you by <a href="http://twitter.com/anssik">@anssik</a>.
+  </footer>
+  <script>
+    window.onload = function () {
+      var video = document.querySelector('video'),
+          play = document.querySelector('#play'),
+          pause = document.querySelector('#pause'),
+          seek = document.querySelector('#seek'),
+          show = document.querySelector('#show');
+      
+      play.onclick = function () { video.play(); };
+      pause.onclick = function () { video.pause(); };
+      seek.onclick = function () { video.fastSeek((seek.value / 100) * video.duration); };
+      show.onclick = function () { video.requestShow(); };
+      video.ontimeupdate = function () { seek.value = (100 / video.duration) * video.currentTime; };
+      
+      // timeupdateonsecondscreen event is an extension to the HTMLMediaElement
+      video.ontimeupdateonsecondscreen = function (currentTime) { seek.value = (100 / video.duration) * currentTime; };
+      video.addEventListener('timeupdateonsecondscreen', function (event) {
+        console.log('Playback position on the second screen is ' + event.detail.currentTimeOnSecondScreen + ' seconds.');
+      });
+    };
+  </script>
+</body>
+</html>
