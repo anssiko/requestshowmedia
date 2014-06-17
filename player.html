@@ -83,6 +83,10 @@
       // FIXME: remove timeUpdateListener before unload to prevent multiple
       // listeners posting the same data if open() is called multiple times.
       video.removeEventListener('timeupdate', timeUpdateListener);
+
+      opener.postMessage({
+        cmd: 'close',
+      }, openerOrigin);
       
       opener.postMessage({
         cmd: 'play',

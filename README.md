@@ -18,9 +18,21 @@ A [second screen &lt;video&gt; sharing demo](http://webscreens.github.io/request
 <script>
 var v = document.querySelector('video');
 v.requestShow();
+
+// Standard HTMLMediaElement methods
 v.play();
 v.pause();
 v.fastSeek(time);
+
+// Experimental extensions to the HTMLMediaElement
+v.ontimeupdateonsecondscreen = function (event) {
+  console.log(event.detail.currentTimeOnSecondScreen);
+};
+
+v.onclosesecondscreen = function () {
+  console.log('Second screen closed.');
+};
+
 </script>
 ```
 ### Next Steps
@@ -28,7 +40,6 @@ v.fastSeek(time);
 * Track and help evolve the Presentation API
 * Implement the missing `HTMLMediaElement` methods
 * Make `requestShow()` return a promise when [the browser support improves](http://caniuse.com/promises) (or use a polyfill)
-* Implement `close()`
 * Use native `fastSeek(time)` when browsers implement it
 
 ### Credits

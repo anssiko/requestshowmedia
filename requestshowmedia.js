@@ -69,6 +69,13 @@ function requestShowMedia(video) {
         video.dispatchEvent(new CustomEvent('timeupdateonsecondscreen',
           { detail: { currentTimeOnSecondScreen: event.data.currentTime } }));
         break;
+      case 'close':
+        try {
+          video.onclosesecondscreen();
+        } catch (ex) { }
+
+        video.dispatchEvent(new Event('closesecondscreen'));
+        break;
       default:
         break;
     }
