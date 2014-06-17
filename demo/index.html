@@ -34,16 +34,29 @@
           seek = document.querySelector('#seek'),
           show = document.querySelector('#show');
       
-      play.onclick = function () { video.play(); };
-      pause.onclick = function () { video.pause(); };
-      seek.onclick = function () { video.fastSeek((seek.value / 100) * video.duration); };
-      show.onclick = function () { video.requestShow(); };
-      video.ontimeupdate = function () { seek.value = (100 / video.duration) * video.currentTime; };
+      play.addEventListener('click', function () {
+        video.play();
+      });
       
-      // timeupdateonsecondscreen event is an extension to the HTMLMediaElement
-      video.ontimeupdateonsecondscreen = function (currentTime) { seek.value = (100 / video.duration) * currentTime; };
+      pause.addEventListener('click', function () {
+        video.pause();
+      });
+      
+      seek.addEventListener('click', function () {
+        video.fastSeek((seek.value / 100) * video.duration);
+      });
+      
+      show.addEventListener('click', function () {
+        video.requestShow();
+      });
+      
+      video.addEventListener('timeupdate', function () {
+        seek.value = (100 / video.duration) * video.currentTime;
+      });
+      
+      // timeupdateonsecondscreen event is an extension to the HTMLMediaElement.
       video.addEventListener('timeupdateonsecondscreen', function (event) {
-        console.log('Playback position on the second screen is ' + event.detail.currentTimeOnSecondScreen + ' seconds.');
+        seek.value = (100 / video.duration) * event.detail.currentTimeOnSecondScreen;
       });
     };
   </script>
