@@ -32,6 +32,7 @@
       
       video.addEventListener('loadedmetadata', function () {
         if (video && video.readyState > video.HAVE_NOTHING) {
+          console.log('(1) video.currentTime = ' + currentTime);
           video.currentTime = currentTime;
         } else {
           // If the video is undefined or not ready yet, we'll need to poll.
@@ -39,6 +40,7 @@
             var video = document.querySelector('video');
             
             try {
+              console.log('(2) video.currentTime = ' + currentTime);
               video.currentTime = currentTime;
             } catch (ex) {
               console.log(ex);
