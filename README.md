@@ -7,19 +7,19 @@ A [second screen &lt;video&gt; sharing demo](http://webscreens.github.io/request
 
 ### How It Works
 
-1. Include the `requestshowmedia.js` script to your page.
+1. Include the `requestshowmedia.js` script to your page, copy `requestshowmedia.js` and `player.html` to the same directory (or see `demo/index.html` for advanced configuration).
 1. Invoke `requestShow()` on the video element to show the video on the second screen.
 1. Use the standard `HTMLMediaElement` methods to control the playback on the second screen.
 1. Enjoy.
 
 ```html
-<script src="../requestshowmedia.js" data-player="../player.html"></script>
+<script src="requestshowmedia.js" data-player="player.html"></script>
 <video src="myvideo.mp4"></video>
 <script>
 var v = document.querySelector('video');
 v.requestShow();
-v.pause();
 v.play();
+v.pause();
 v.fastSeek(time);
 </script>
 ```
