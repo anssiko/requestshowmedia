@@ -9,8 +9,9 @@ var video = null,
     // var fastSeek = HTMLMediaElement.prototype.fastSeek; // not implemented by browsers yet
 
 HTMLVideoElement.prototype.requestShow = function () {
-  requestShowMedia(this);
   video = this;
+  // TODO: return a promise instead.
+  return requestShowMedia(this);
 };
 
 HTMLMediaElement.prototype.play = function (args) {
