@@ -3,29 +3,18 @@
 <head>
   <title>Second Screen &lt;video&gt; Sharing Demo</title>
   <script src="../requestshowmedia.js" data-player="../player.html"></script>
-  <!-- Advanced: if player.html is not same origin, define its origin in "data-playerorigin" -->
-  <!-- script src="../requestshowmedia.js" data-player="../player.html" data-playerorigin="/"></script-->
+  <!--
+    Configuration:
+    * @src - the address of the requestshowmedia.js (mandatory)
+    * @data-player - the address of the player (mandatory)
+    * @data-playerorigin - the origin of the player, same origin if undefined (optional)
+    
+    Example:
+    <script src="../requestshowmedia.js"
+            data-player="http://example.org/player.html"
+            data-playerorigin="http://example.org/"></script>
+  -->
   <link rel="stylesheet" href="index.css">
-</head>
-<body>
-  <video autoplay>
-    <source src="big-buck-bunny.mp4">
-    <source src="big-buck-bunny.webm">
-  </video>
-  <div id="controls">
-    <button id="play">&#9658;</button>
-    <button id="pause">&#9612;&#9612;</button>
-    <input id="seek" type="range" value="0">
-    <button id="show">s</button>
-  </div>
-  <p>
-    Tip: click the <span class="show-icon">s</span> icon to display the
-    video on a second screen. For more information, please consult the
-    <a href="../README.md">README</a>.
-  </p>
-  <footer>
-    Demo brought to you by <a href="http://twitter.com/anssik">@anssik</a>.
-  </footer>
   <script>
     window.onload = function () {
       var video = document.querySelector('video'),
@@ -60,5 +49,25 @@
       });
     };
   </script>
+</head>
+<body>
+  <video autoplay>
+    <source src="big-buck-bunny.mp4">
+    <source src="big-buck-bunny.webm">
+  </video>
+  <div id="controls">
+    <button id="play">&#9658;</button>
+    <button id="pause">&#9612;&#9612;</button>
+    <input id="seek" type="range" value="0">
+    <button id="show">s</button>
+  </div>
+  <p>
+    Tip: click the <span class="show-icon">s</span> icon to display the
+    video on a second screen. For more information, please consult the
+    <a href="../README.md">README</a>.
+  </p>
+  <footer>
+    Demo brought to you by <a href="http://twitter.com/anssik">@anssik</a>.
+  </footer>
 </body>
 </html>
