@@ -22,7 +22,8 @@
           pause = document.querySelector('#pause'),
           seek = document.querySelector('#seek'),
           show = document.querySelector('#show'),
-          overlay = document.querySelector('#overlay');
+          overlay = document.querySelector('#overlay'),
+          secondScreen = null;
       
       play.addEventListener('click', function () {
         video.play();
@@ -37,9 +38,14 @@
       });
       
       show.addEventListener('click', function () {
-        video.requestShow();
-        show.disabled = true;
-        overlay.hidden = false;
+        if (secondScreen) {
+          secondScreen.close();
+          secondScreen = null;
+        } else {
+          secondScreen = video.requestShow();
+          show.classList.add('active');
+          overlay.hidden = false;
+        }
       });
       
       video.addEventListener('timeupdate', function () {
@@ -53,7 +59,7 @@
       
       // closesecondscreen event is an extension to the HTMLMediaElement.
       video.addEventListener('closesecondscreen', function () {
-        show.disabled = false;
+        show.classList.remove('active');
         overlay.hidden = true;
       });
     };

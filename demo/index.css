@@ -46,8 +46,8 @@ video {
   float: right;
 }
 
-#show[disabled] {
-  opacity: 0.5;
+#show.active {
+  color: red;
 }
 
 footer {
