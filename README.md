@@ -27,6 +27,7 @@ v.fastSeek(time);
 
 * Track and help evolve the Presentation API
 * Implement the missing `HTMLMediaElement` methods
+* Make `requestShow()` return a promise when [the browser support improves](http://caniuse.com/promises) (or use a polyfill)
 * Implement `close()`
 * Use native `fastSeek(time)` when browsers implement it
 
