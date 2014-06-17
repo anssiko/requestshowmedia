@@ -43,23 +43,7 @@
       document.title = '[Playing] ' + video.dataset.filename;
       
       video.addEventListener('loadedmetadata', function () {
-        if (video && video.readyState > video.HAVE_NOTHING) {
-          video.currentTime = currentTime;
-        } else {
-          // If the video is undefined or not ready yet, we'll need
-          // to poll to address an issue in Safari.
-          var timer = setInterval(function () {
-            var video = document.querySelector('video');
-            
-            try {
-              video.currentTime = currentTime;
-            } catch (ex) {
-              video = undefined;
-            }
-            
-            if (video && video.currentTime === currentTime) clearInterval(timer);
-          }, 100);
-        }
+        video.currentTime = currentTime;
       });
       
       video.addEventListener('timeupdate', timeUpdateListener);
