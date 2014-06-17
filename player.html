@@ -35,9 +35,16 @@
           video.currentTime = currentTime;
         } else {
           // If the video is undefined or not ready yet, we'll need to poll.
-          var timer = setInterval(function (video) {
+          var timer = setInterval(function () {
             var video = document.querySelector('video');
-            video.currentTime = currentTime;
+            
+            try {
+              video.currentTime = currentTime;
+            } catch (ex) {
+              console.log(ex);
+              video = undefined;
+            }
+            
             if (video && video.currentTime === currentTime) clearInterval(timer);
           }, 100);
         }
