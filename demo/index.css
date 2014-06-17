@@ -46,6 +46,10 @@ video {
   float: right;
 }
 
+#show[disabled] {
+  opacity: 0.5;
+}
+
 footer {
   font-size: 75%;
   text-shadow: #fff 0 1px 0;
@@ -53,4 +57,26 @@ footer {
   left: 0;
   position: fixed;
   color: gray;
+}
+
+#overlay {
+  position: fixed;
+  top: 32px;
+  padding: 16px;
+  font-size: 800%;
+  font-family: SecondScreenSymbol;
+  animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; 
+  -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; 
+}
+
+@keyframes blinker {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
 }

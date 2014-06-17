@@ -21,7 +21,8 @@
           play = document.querySelector('#play'),
           pause = document.querySelector('#pause'),
           seek = document.querySelector('#seek'),
-          show = document.querySelector('#show');
+          show = document.querySelector('#show'),
+          overlay = document.querySelector('#overlay');
       
       play.addEventListener('click', function () {
         video.play();
@@ -37,6 +38,8 @@
       
       show.addEventListener('click', function () {
         video.requestShow();
+        show.disabled = true;
+        overlay.hidden = false;
       });
       
       video.addEventListener('timeupdate', function () {
@@ -47,10 +50,17 @@
       video.addEventListener('timeupdateonsecondscreen', function (event) {
         seek.value = (100 / video.duration) * event.detail.currentTimeOnSecondScreen;
       });
+      
+      // closesecondscreen event is an extension to the HTMLMediaElement.
+      video.addEventListener('closesecondscreen', function () {
+        show.disabled = false;
+        overlay.hidden = true;
+      });
     };
   </script>
 </head>
 <body>
+  <div id="overlay" hidden>s</div>
   <video autoplay>
     <source src="big-buck-bunny.mp4">
     <source src="big-buck-bunny.webm">
