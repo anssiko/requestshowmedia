@@ -10,7 +10,7 @@
     </style>
     <script>
     (function () {
-
+    
     var openerOrigin = null,
         timeUpdateListener = null;
     
@@ -18,7 +18,7 @@
       var video = document.querySelector('video'),
           currentSrc = event.data.currentSrc,
           currentTime = event.data.currentTime;
-
+      
       timeUpdateListener = function () {
         opener.postMessage({
           cmd: 'ontimeupdateonsecondscreen',
@@ -31,7 +31,16 @@
       document.title = '[Playing] ' + video.dataset.filename;
       
       video.addEventListener('loadedmetadata', function () {
-        video.currentTime = currentTime;
+        if (video && video.readyState > video.HAVE_NOTHING) {
+          video.currentTime = currentTime;
+        } else {
+          // If the video is undefined or not ready yet, we'll need to poll.
+          var timer = setInterval(function (video) {
+            var video = document.querySelector('video');
+            video.currentTime = currentTime;
+            if (video && video.currentTime === currentTime) clearInterval(timer);
+          }, 100);
+        }
       });
       
       video.addEventListener('timeupdate', timeUpdateListener);
@@ -64,10 +73,10 @@
           break;
       }
     });
-
+    
     addEventListener('beforeunload', function () {
       var video = document.querySelector('video');
-
+      
       // FIXME: remove timeUpdateListener before unload to prevent multiple
       // listeners posting the same data if open() is called multiple times.
       video.removeEventListener('timeupdate', timeUpdateListener);
