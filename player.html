@@ -26,7 +26,18 @@
         }, openerOrigin);
       };
       
-      video.src = currentSrc;
+      /*
+        FIXME: Chrome does not fire loadedmetadata until the
+        first video has fully loaded.
+        
+        Issues: https://crbug.com/31014
+                https://crbug.com/116670
+        
+        Patch:  https://codereview.chromium.org/232003002/
+        
+        A workaround is to add a random query string to the currentSrc.
+      */
+      video.src = currentSrc + '?' + (new Date()).getTime();
       video.dataset.filename = currentSrc.split('/')[currentSrc.split('/').length-1];
       document.title = '[Playing] ' + video.dataset.filename;
       
