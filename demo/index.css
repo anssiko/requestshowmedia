@@ -46,7 +46,7 @@ video {
   float: right;
 }
 
-#show.active {
+#show[data-active='true'] {
   color: red;
 }
 
