@@ -33,6 +33,7 @@ v.onclosesecondscreen = function () {
   console.log('Second screen closed.');
 };
 
+v.exitShow();
 </script>
 ```
 ### Next Steps
