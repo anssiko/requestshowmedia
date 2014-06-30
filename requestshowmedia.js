@@ -14,6 +14,10 @@ HTMLVideoElement.prototype.requestShow = function () {
   return requestShowMedia(this);
 };
 
+HTMLVideoElement.prototype.exitShow = function () {
+  video.player.close();
+};
+
 HTMLMediaElement.prototype.play = function (args) {
   if (this.dataset.secondScreenEnabled === 'true') {
     video.player.postMessage({ cmd: 'play'}, playerOrigin);
