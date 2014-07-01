@@ -10,8 +10,7 @@ var video = null,
 
 HTMLVideoElement.prototype.requestShow = function () {
   video = this;
-  // TODO: return a promise instead.
-  return requestShowMedia(this);
+  requestShowMedia(this);
 };
 
 HTMLVideoElement.prototype.exitShow = function () {
